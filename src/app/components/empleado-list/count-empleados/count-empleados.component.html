@@ -1,0 +1,64 @@
+<div class="card">
+  <div class="card-body d-flex flex-row justify-content-between align-items-center">
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="sexo"
+        value="Empleados"
+        (change)="radioChangeHandler($event)"
+      />
+      <label class="form-check-label" for="Empleados"
+        >Empleados({{ employees }})</label
+      >
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="sexo"
+        value="Masculino"
+        (change)="radioChangeHandler($event)"
+      />
+      <label class="form-check-label" for="Masculino"
+        >Masculino({{ masculino }})</label
+      >
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="sexo"
+        value="Femenino"
+        (change)="radioChangeHandler($event)"
+      />
+      <label class="form-check-label" for="Femenino"
+        >Femenino({{ femenino }})</label
+      >
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="sexo"
+        value="avanzada"
+        (change)="radioChangeHandler($event)"
+      />
+      <label class="form-check-label" for="Femenino"
+        >Avanzada</label
+      >
+    </div>
+    <div class="input-group mb-3">
+      <select class="form-select form-select-md" aria-label=".form-select-lg example" [(ngModel)]="filterAdvanced" disabled>
+        <option selected>Todos</option>
+        <option value="No">No.</option>
+        <option value="Nombre">Nombre</option>
+        <option value="RFC">RFC</option>
+        <option value="A_Materno">Apellido Materno</option>
+        <option value="A_Paterno">Apellido Paterno</option>
+        <option value="Sexo">Sexo</option>
+      </select>
+      <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..." aria-describedby="basic-addon1" disabled>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container mt-3">
+  <app-count-empleados
+    [masculino]="getAllEmployees('M')"
+    [femenino]="getAllEmployees('F')"
+    [employees]="getAllEmployees('')"
+    (genderSelect)="onChangeFilter($event)"
+  ></app-count-empleados>
+  <div class="card mt-3">
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">RFC</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido Paterno</th>
+            <th scope="col">Apellido Materno</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Salario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let emp of listEmpleados">
+            <tr
+              *ngIf="
+                filter === 'Empleados' ||
+                filter === emp.Sexo
+              "
+            >
+              <th scope="row">{{ emp.No }}</th>
+              <td>{{ emp.RFC }}</td>
+              <td>{{ emp.Nombre }}</td>
+              <td>{{ emp.A_Paterno }}</td>
+              <td>{{ emp.A_Materno }}</td>
+              <td>{{ emp.Sexo }}</td>
+              <td>{{ emp.Salario | currency }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

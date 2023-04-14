@@ -1,0 +1,25 @@
+input[type=radio]{
+  width: 25px;
+  height: 25px;
+}
+
+label {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.input-group {
+  width: 40%;
+  height: 50px;
+  padding-top: 5px;
+
+  input {
+    height: 100%;
+    width: 100px;
+  }
+
+  select {
+    height: 100%;
+    width: 20px;
+  }
+}
