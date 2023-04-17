@@ -6,6 +6,8 @@ export class Empleado {
   A_Materno: string = '';
   Sexo: string = '';
   Salario: number = 0;
+  [key: string]: string | number;
+
 
   constructor(
     No: number,

@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Empleado } from 'src/app/models/Empleados';
+import { DatosBusqueda } from 'src/app/models/DatosBusqueda';
 
 @Component({
   selector: 'app-empleado-list',
@@ -53,29 +54,81 @@ export class EmpleadoListComponent {
       'Masculino',
       15100
     ),
-   new Empleado(
-    19141129,
-    'test',
-    'Yazmin Alejandra',
-    'Castillo',
-    'Martinez',
-    'Femenino',
-    95500
-   )
+    new Empleado(
+      19141129,
+      'test',
+      'Yazmin Alejandra',
+      'Castillo',
+      'Martinez',
+      'Femenino',
+      95500
+    ),
+  ];
+
+  baselistEmpleados: Empleado[] = [
+    new Empleado(
+      19141154,
+      'test',
+      'Isaac',
+      'Hernández',
+      'Reséndiz',
+      'Masculino',
+      1000000
+    ),
+    new Empleado(
+      19141141,
+      'test',
+      'Vanessa',
+      'Fernandez',
+      '',
+      'Femenino',
+      10000000
+    ),
+    new Empleado(
+      19141141,
+      'test',
+      'Itzel Guadalupe',
+      'Andrade',
+      'Guitierrez',
+      'Femenino',
+      120000
+    ),
+    new Empleado(
+      19141120,
+      'test',
+      'Kevin Daniel',
+      'Avellaneda',
+      'Trejo',
+      'Masculino',
+      8000
+    ),
+    new Empleado(
+      19141127,
+      'test',
+      'Sergio Leonardo',
+      'Campos',
+      'Rangel',
+      'Masculino',
+      15100
+    ),
+    new Empleado(
+      19141129,
+      'test',
+      'Yazmin Alejandra',
+      'Castillo',
+      'Martinez',
+      'Femenino',
+      95500
+    ),
   ];
 
   filter: string = 'Empleados';
 
+  constructor() {}
 
-  constructor() {
+  ngOnInit(): void {}
 
-  }
-
-  ngOnInit(): void {
-
-  }
-
- /*  getAllEmp(): number{
+  /*  getAllEmp(): number{
     return this.listEmpleados.length
   }
 
@@ -88,20 +141,31 @@ export class EmpleadoListComponent {
   } */
 
   getAllEmployees(sex: string): number {
-    if(sex=='M'){
-      return this.listEmpleados.filter(emp => emp.Sexo === 'Masculino').length;
+    if (sex == 'M') {
+      return this.listEmpleados.filter((emp) => emp.Sexo === 'Masculino')
+        .length;
     }
 
-    if(sex=='F'){
-      return this.listEmpleados.filter(emp => emp.Sexo === 'Femenino').length;
+    if (sex == 'F') {
+      return this.listEmpleados.filter((emp) => emp.Sexo === 'Femenino').length;
     }
 
     return this.listEmpleados.length;
   }
 
-  onChangeFilter(filtro:string){
-    this.filter=filtro;
+  onChangeFilter(filtro: string) {
+    this.listEmpleados = [...this.baselistEmpleados];
+    this.filter = filtro;
+    console.log('filtro', this.filter);
   }
 
+  searchAdvanced(obj: DatosBusqueda) {
+    this.listEmpleados = this.baselistEmpleados.filter((emp) => {
+      obj.valor = obj.valor.toLowerCase();
+      const empleadoV = emp[obj.tipo].toString().toLowerCase();
+      return empleadoV.includes(obj.valor);
+    });
 
+    this.filter = 'Empleados';
+  }
 }

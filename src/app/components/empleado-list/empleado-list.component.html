@@ -5,6 +5,7 @@
     [femenino]="getAllEmployees('F')"
     [employees]="getAllEmployees('')"
     (genderSelect)="onChangeFilter($event)"
+    (setValuesSearch)="searchAdvanced($event)"
   ></app-count-empleados>
   <div class="card mt-3">
     <div class="card-body">
