@@ -14,6 +14,7 @@ export class CountEmpleadosComponent {
   @Input() femenino: number = 0;
   @Input() employees: number = 0;
 
+
   filterAdvanced = 'Todos';
   valorSearch = '';
 

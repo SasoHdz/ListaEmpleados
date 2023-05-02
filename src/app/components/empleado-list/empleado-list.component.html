@@ -19,27 +19,101 @@
             <th scope="col">Apellido Materno</th>
             <th scope="col">Sexo</th>
             <th scope="col">Salario</th>
+            <th scope="col">Fecha Nacimiento</th>
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let emp of listEmpleados">
-            <tr
-              *ngIf="
-                filter === 'Empleados' ||
-                filter === emp.Sexo
-              "
-            >
+          <ng-container *ngFor="let emp of listEmpleados; let i = index">
+            <tr *ngIf="filter === 'Empleados' || filter === emp.Sexo">
               <th scope="row">{{ emp.No }}</th>
-              <td>{{ emp.RFC }}</td>
+              <td>
+                <p class="text-danger" *ngIf="emp.Fecha_nac === ''; else empleadoRFC">{{ emp.showRFC}}</p>
+               <ng-template #empleadoRFC>
+                <p class="text-info bg-dark">{{emp.showRFC}}</p>
+               </ng-template>
+
+
+              </td>
               <td>{{ emp.Nombre }}</td>
               <td>{{ emp.A_Paterno }}</td>
               <td>{{ emp.A_Materno }}</td>
               <td>{{ emp.Sexo }}</td>
               <td>{{ emp.Salario | currency }}</td>
+              <td>
+                <p *ngIf="emp.Fecha_nac != ''">{{ emp.Fecha_nac }}</p>
+                <!-- Button trigger modal -->
+                <button
+                  *ngIf="emp.Fecha_nac == ''"
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  (click)="currentIndex(i)"
+                >
+                  Agregar
+                </button>
+              </td>
             </tr>
           </ng-container>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agrega tu fecha de nacimiento</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"
+            >Fecha Nacimiento</span
+          >
+          <input
+            type="date"
+            class="form-control"
+            placeholder="año-mes-dia"
+            pattern="[\d]{2}\-[\d]{2}\-[\d]{4}"
+            aria-label="dia-mes-año"
+            aria-describedby="basic-addon1"
+            value="2000-01-01"
+            [(ngModel)]="fechaSelect"
+          />
+        </div>
+        <div *ngIf="!fechaRegex.test(fechaSelect)" class="alert alert-danger" role="alert">
+          La fecha es incorrecta......
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="addNacimiento(fechaSelect)"
+          [disabled]="!fechaRegex.test(fechaSelect)"
+        >
+          Guardar Cambios
+        </button>
+      </div>
     </div>
   </div>
 </div>
